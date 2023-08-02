@@ -1,11 +1,64 @@
+
 #contact_modal {
+    position: fixed;
+    inset: 0;
+    z-index: 11;
+    background-color: #312E2E;
     display: none;
+    backdrop-filter: blur(10px);
 }
 
+#contact_modal::backdrop {
+    background-color: #312E2E;
+    z-index: 11;
+    inset: 0;
+    opacity: 50%;
+}
+
+.card img, .card video {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+header {}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.photograph-section {}
+
 .photograph-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
+}
+
+.photograph-header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.heart_icon {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    
+    /* top: -200px; */
+    background-color: #901C1C;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 60%;
 }
 
 .contact_button {

@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <!-- <meta descripton="">  -->
+    <link href="css/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <img src="assets/images/logo.png" class="logo" aria-hidden="true" />
     </header>
     <main id="main">
       <div class="photograph-header">
-        <!-- type button -->
+        <!-- header -->
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
+      <section class="photograph-section">
+        <!-- section -->
+      </section>
     </main>
-    <div id="contact_modal">
+    <dialog id="contact_modal">
 			<div class="modal">
 				<header>
           <h2>Contactez-moi</h2>
@@ -32,8 +38,9 @@
           <button class="contact_button">Envoyer</button>
 				</form>
 			</div>
-		</div>
-    <script src="/scripts/pages/photographer.js"></script>
-    <script src="/scripts/utils/contactForm.js"></script>
+		</dialog>
+    <script src="scripts/templates/photographer.js" async ></script>
+    <script src="scripts/pages/photographer.js" async ></script>
+    <script src="scripts/utils/contactForm.js" async  ></script>
   </body>
 </html>
