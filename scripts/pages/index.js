@@ -1,3 +1,5 @@
+import photographerTemplate from "../templates/factory"
+// 
 async function getPhotographers() {
     try {
         let res = await fetch("data/photographers.json")
@@ -40,9 +42,8 @@ async function displayData(photographers) {
 // 
 async function init() {
     const { photographers } = await getPhotographers();
-    // console.log(photographers)
+    // 
     displayData(photographers);
 }
 // 
 init();
-    

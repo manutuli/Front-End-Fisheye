@@ -7,39 +7,55 @@
     <link href="css/normalize.css" rel="stylesheet" type="text/css" />
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet"> -->
     <title>Fisheye - photographe </title>
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" aria-hidden="true" />
+      <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
+      <header class="photograph-header">
         <!-- header -->
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-      </div>
+        <button id="open_modal" type="button" aria-label="open contact form" >Contactez-moi</button>
+      </header>
       <section class="photograph-section">
         <!-- section -->
       </section>
     </main>
-    <dialog id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <!-- anchor close to modal -->
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+    <dialog id="contact_modal" class="mod">
+			<div class="modal mod">
+        <header class="mod">
+          <h2 class="mod">Contactez-moi</h2>
+          <button id="close_modal" class="mod">
+            <img src="assets/icons/close.svg" alt="close contact form" class="mod" />
+          </button>
         </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
+				<form method="dialog" class="mod">
+          <!-- form -->
+					<div class="mod">
+						<label for="firstname" class="mod" >Prénom</label>
+						<input type="text" aria-label="type your first name here" name="firstname" class="mod" />
 					</div>
-          <button class="contact_button">Envoyer</button>
+					<div class="mod">
+						<label for="lastname" class="mod" >Nom</label>
+						<input type="text" aria-label="type your last name here" name="lastname" />
+					</div>
+					<div class="mod">
+						<label for="email" class="mod" >Email</label>
+						<input type="email" aria-label="type your email here" name="email" class="mod" />
+					</div>
+					<div class="mod">
+						<label for="textarea" class="mod" >Votre Message</label>
+            <textarea name="message" id="textarea" name="textarea" cols="30" rows="10" class="mod">
+              <!-- <input type="text"> -->
+            </textarea>
+					</div>
+          <button class="contact_button mod" type="submit" aria-label="submit contact form">Envoyer</button>
 				</form>
 			</div>
 		</dialog>
-    <script src="scripts/templates/photographer.js" async ></script>
+    <script src="scripts/templates/factory.js" async ></script>
     <script src="scripts/pages/photographer.js" async ></script>
     <script src="scripts/utils/contactForm.js" async  ></script>
   </body>

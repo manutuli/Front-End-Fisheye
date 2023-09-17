@@ -1,3 +1,4 @@
+// 
 // class PhotographerFactory {
 //     constructor (data) {
 //         this.name = data.name
@@ -36,7 +37,7 @@
 // const photographer = new Photographer("mimi")
 // return photographer.get()
 // 
-function photographerTemplate(data) {
+export default function photographerTemplate(data) {
     const { name, portrait, tagline, price, country, city, id } = data;
     const picture = `assets/photographers/Photographers ID Photos/${portrait}`;
     // 

@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2018,
+    "parser": "@babel/eslint-parser",
+    "babelOptions": {
+      "babelrc": false,
+      "configFile": false,
+      "presets": ["@babel/preset-env"],
+      "targets": "default"
+    },
+    "plugins": [
+      "@babel",
+      "html"
+    ]
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  }
+}

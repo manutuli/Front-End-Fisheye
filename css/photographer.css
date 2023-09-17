@@ -1,59 +1,6 @@
 
-#contact_modal {
-    position: fixed;
-    inset: 0;
-    z-index: 11;
-    background-color: #312E2E;
-    display: none;
-    backdrop-filter: blur(10px);
-}
 
-#contact_modal::backdrop {
-    background-color: #312E2E;
-    z-index: 11;
-    inset: 0;
-    opacity: 50%;
-}
-
-.card img, .card video {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-}
-
-header {}
-
-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.photograph-section {}
-
-.photograph-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FAFAFA;
-}
-
-.photograph-header img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.heart_icon {
-    width: 10px;
-    height: 10px;
-    position: relative;
-    
-    /* top: -200px; */
-    background-color: #901C1C;
-}
-
+/* semantics */
 main {
     display: flex;
     flex-direction: column;
@@ -61,7 +8,74 @@ main {
     min-width: 60%;
 }
 
-.contact_button {
+
+/* lightbox */
+.lightbox_content > img, .lightbox_content > video {
+    width: 600px;
+    height: 400px;
+    object-fit: cover;
+}
+.lightbox_modal[open] .lightbox_container {
+    width: 600px;
+    height: 500px;
+}
+.lightbox_container {
+    display: flex;
+    align-items: center;
+    outline: 2px solid #312E2E;
+    width: 500px;
+    height: 400px;
+}
+.lightbox_title {
+    content: attr(mediaTitle);
+    color: #901C1C;
+
+}
+.lightbox_close_icon::after {
+    content: url("../assets/icons/close.svg");
+}
+
+.rightBtn > span::after {
+    color: #901C1C;
+    /* content: url("../assets/icons/right.svg"); */
+}
+.leftBtn > span::after {
+    color: #901C1C;
+    /* content: url("../assets/icons/left.svg"); */
+}
+.close_lightbox {
+    /*  */
+}
+.leftBtn, .rightBtn{
+    width: 80px;
+    height: 80px;
+    background: transparent;
+}
+.leftBtn{
+    order: -1;
+}
+.hide_media{
+    display: none;
+}
+
+
+/* contact */
+#contact_modal {
+    position: fixed;
+    inset: 10px 10px;
+    z-index: 11;
+    background-color: #DB8876;
+}
+dialog {
+    border: 2px solid #DB8876;
+}
+dialog::backdrop {
+    z-index: 11;
+    inset: 0;
+    opacity: 90%;
+    background-color: #fff;
+}
+#open_modal {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -73,11 +87,66 @@ main {
     border-radius: 5px;
     cursor: pointer;
 }
+#close_modal > img {
+    width: 20px;
+}
+img, video {
+    max-width: 500px;
+}
+header {}
+aside {}
+.aside_tag {
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    right: 100px;
+    background-color: #DB8876;
+    border-radius: 20px;
+}
+.likes {}
+.likes::after {
+    content: url(heart.svg);
+    position: relative;
+    left: 5px;
+}
+aside .likes::after {
+    content: url(black_heart.svg);
+}
 
+
+/* cards */
+.card img, .card video {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.photograph-section {}
+.photograph-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAFAFA;
+}
+.photograph-header img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+/*  */
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    min-width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,45 +154,42 @@ main {
     padding: 35px;
     margin: auto;
 }
-
 .modal header {
+    display: flex;
     justify-content: space-between;
     width: 100%;
 }
-
 .modal header img {
     cursor: pointer;
 }
-
 .modal header h2 {
-    font-size: 64px;
+    font-size: 40px;
+    overflow-wrap: nowrap;
     font-weight: normal;
     text-align: center;
 }
 
+
+/* form */
 form {
     display: flex;
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
 }
-
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 30px;
 }
-
 form div {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: self-start;
     margin-bottom: 26px;
 }
-
 form input {
     width: 100%;
-    height: 68px;
+    height: 30px;
     border: none;
     border-radius: 5px;
 }

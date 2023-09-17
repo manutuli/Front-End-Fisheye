@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "lint": "eslint --max-warnings=0 ."
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.22.15",
+    "@babel/eslint-plugin": "^7.22.10",
+    "eslint": "^8.49.0",
+    "eslint-plugin-html": "^7.1.0"
+  }
+}
