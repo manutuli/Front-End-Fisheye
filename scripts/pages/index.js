@@ -1,4 +1,6 @@
-import photographerTemplate from "../templates/factory"
+
+
+import photographerTemplate from "../templates/factory.js"
 // 
 async function getPhotographers() {
     try {
@@ -31,7 +33,7 @@ async function getPhotographers() {
     } catch (err) {console.log(err)}
 }
 // 
-async function displayData(photographers) {
+function displayData(photographers) {
     const photographersSection = document.querySelector(".photographer_section");
     photographers.forEach((photographer) => {
         const photographerModel = photographerTemplate(photographer);
@@ -41,8 +43,9 @@ async function displayData(photographers) {
 }
 // 
 async function init() {
+    console.log("test", "photographers")
     const { photographers } = await getPhotographers();
-    // 
+    console.log("fetched", photographers)
     displayData(photographers);
 }
 // 

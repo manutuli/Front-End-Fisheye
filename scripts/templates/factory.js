@@ -37,6 +37,7 @@
 // const photographer = new Photographer("mimi")
 // return photographer.get()
 // 
+
 export default function photographerTemplate(data) {
     const { name, portrait, tagline, price, country, city, id } = data;
     const picture = `assets/photographers/Photographers ID Photos/${portrait}`;

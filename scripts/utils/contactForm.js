@@ -1,3 +1,17 @@
+
+//
+// create dialog
+// create closeBtn
+// create container
+// create header
+// create h2
+// create button
+// create img
+// create form
+// create field
+// create label
+// create input
+// create textarea
 // 
 const openModalBtn = document.getElementById("open_modal");
 const closeModalBtn = document.getElementById("close_modal");

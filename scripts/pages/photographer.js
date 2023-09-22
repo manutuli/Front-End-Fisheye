@@ -1,12 +1,12 @@
 
 
-// setters
+// Utils
 
 
 const counter = {
   likes : 0,
   tabIndex : 10,
-  getAsyncLikes: async function () {
+  getLikes: function () {
     return this.likes;
   },
   setTabindex : async function (elmt) {
@@ -15,45 +15,42 @@ const counter = {
   },
 }
 /**
- * Sorts an Array of Objects with Properties : mediaDate , mediaTitle and mediaLikes.
- *  The Objects are sorted by the given Option : date, title or likes.
+ * Sorts an Array of Objects
  * 
- * @param {String} option 
- * @param {Array} data 
- * @returns {Array} sortedData
+ * @param { String } option 
+ * @param { Array.<Object> } data  // { mediaDate , mediaTitle , mediaLikes }
+ * @returns { Array.<Object> } sortedData
  */ 
-async function sortMedia(data, option) {
-  let sortedData = [];
-  // 
+function sortMedia(data, option) {  // 
   if(option === null) {
     return data
   }
   // 
   if (option === "date") {
-    sortedData = data.toSorted((a, b) => Date.parse(a.mediaDate) - Date.parse(b.mediaDate))
+    let sortedData = data.toSorted((a, b) => Date.parse(a.mediaDate) - Date.parse(b.mediaDate))
     return sortedData
   }
   // 
   if (option === "title") {
-    sortedData = data.toSorted((a, b) => a.mediaTitle.localeCompare(b.mediaTitle, 'fr'))
+    let sortedData = data.toSorted((a, b) => a.mediaTitle.localeCompare(b.mediaTitle, 'fr'))
     return sortedData
   }
   // 
   if (option === "likes") {
-    sortedData = data.toSorted((a, b) => parseInt(a.mediaLikes) - parseInt(b.mediaLikes))
+    let sortedData = data.toSorted((a, b) => parseInt(a.mediaLikes) - parseInt(b.mediaLikes))
     return sortedData
   }
 }
 
 
-// getters
+// Fetch Data
 
 
 /**
  * Fetches one photographer Object by its id 
  * 
- * @param {String} photographerId 
- * @returns {(Object | Error)}
+ * @param { String } photographerId 
+ * @returns { (Object | Error) }
  */
 async function getPhotographerById(photographerId) {
   try {
@@ -72,10 +69,10 @@ async function getPhotographerById(photographerId) {
   }
 }
 /**
- * Fetches an Array of "media" Objects by their photographer "id" 
+ * Fetches an Array of media Objects  
  * 
- * @param {String} photographerId
- * @returns {(Array | Error)} 
+ * @param { String } photographerId
+ * @returns { (Array | Error) } 
  */
 async function getMedia(photographerId) {
   try {
@@ -101,14 +98,14 @@ async function getMedia(photographerId) {
 
 
 /**
- * Creates and Displays the Header of the photographer page from the given photographer Object
+ * Creates and Displays the Header of the photographer page
  * 
- * @param {Object} photographer 
+ * @param { Object } photographer // { name, city, country, tagline, price, portrait }
  */
 async function displayHeader(photographer) {
   const header = document.querySelector(".photograph-header");
+  const bio = document.createElement("div");
   const h2 = document.createElement("h2");
-  const priceText = document.createElement("h5");
   const taglineText = document.createElement("h4");
   const locationText = document.createElement("h3");
   const img = document.createElement("img");
@@ -116,27 +113,27 @@ async function displayHeader(photographer) {
   h2.textContent = photographer.name;
   locationText.textContent = `${photographer.city}, ${photographer.country}.`;
   taglineText.textContent = photographer.tagline;
-  priceText.textContent = `${photographer.price} € / jour`;
+  bio.classList.add("bio")
   img.setAttribute(
     "src",
     `assets/photographers/Photographers ID Photos/${photographer.portrait}`
   );
   img.setAttribute("alt", `Portrait of ${photographer.name}`);
   //
-  header.appendChild(h2);
-  header.appendChild(locationText);
-  header.appendChild(taglineText);
-  header.appendChild(priceText);
+  bio.appendChild(h2);
+  bio.appendChild(locationText);
+  bio.appendChild(taglineText);
+  header.appendChild(bio);
   header.appendChild(img);
 }
 /**
  * Returns an Object from media Object and photographer name
  * 
- * @param {Object} media 
- * @param {String} photographerName 
- * @returns {Object} info, img, id, title, video, data, likes
+ * @param { Object } media 
+ * @param { String } photographerName 
+ * @returns { Object } info, img, id, title, video, data, likes
  */
-async function mediaFactory(media, photographerName) {
+ function mediaFactory(media, photographerName) {
   const { date, likes, title, video, image, id } = media;
   let obj = {}
   if (image) {
@@ -167,17 +164,16 @@ async function mediaFactory(media, photographerName) {
 /**
  * Returns media informations Component
  * 
- * @param {Object} media 
- * @param {String} name 
- * @param {Object} counter 
- * @returns {HTMLDivElement}
+ * @param { Object } media // { title, likes, date }
+ * @param { String } name 
+ * @param { Object } counter 
+ * @returns { HTMLDivElement }
  */
-async function displayInfo(media, name, counter) {
+function displayInfo(media, name, counter) {
   const { title, likes, date } = media;
   counter.likes += likes;
   const info = document.createElement("div");
   const h3 = document.createElement("h3");
-  const h4 = document.createElement("h4");
   const lks = document.createElement("p");
   //
   lks.classList.add("likes");
@@ -187,12 +183,9 @@ async function displayInfo(media, name, counter) {
     "aria-label",
     `${title}, by ${name}, ${likes} likes, date: ${date}`
   );
-  //
   h3.textContent = title;
   lks.textContent = `${likes}`;
-  h4.textContent = `date : ${date}`;
-  //
-  info.appendChild(h4);
+  // 
   info.appendChild(h3);
   info.appendChild(lks);
   return info;
@@ -200,15 +193,15 @@ async function displayInfo(media, name, counter) {
 /**
  * Returns the Tag Component
  * 
- * @param {Object} photographer 
- * @returns {HTMLElement} aside
+ * @param { Object } photographer // { price }
+ * @returns { HTMLElement } aside
  */
-async function displayTag(photographer) {
+function displayTag(photographer) {
   const aside = document.createElement("aside");
   const priceText = document.createElement("p");
   const totalLikesText = document.createElement("p");
   //
-  totalLikesText.textContent = await counter.getAsyncLikes();
+  totalLikesText.textContent = counter.getLikes();
   totalLikesText.classList.add("likes");
   priceText.textContent = `${photographer.price} € / jour`;
   aside.classList.add("aside_tag");
@@ -229,25 +222,33 @@ async function displayContactModal(photographerName) {
 /**
  * Returns the Cards Section Component 
  * 
- * @param {String} option 
- * @param {String} photographerId 
- * @param {String} photographerName 
- * @param {Object} counter 
- * @param {Object} media 
- * @returns {HTMLElement} section
+ * @param { String } option 
+ * @param { String } photographerId 
+ * @param { String } photographerName 
+ * @param { Object } counter 
+ * @param { Array.<Object> } media 
+ * @returns { HTMLElement } section
  */
-async function displayCards(option, photographerId, photographerName, counter, media) {
+function displayCards(option, photographerId, photographerName, counter, media) {
   const section = document.querySelector(".photograph-section");
-  let obj, info, data = [] ;
+  let data = [];
+  let sortedData = [] ;
   // 
-  for (const prop in media) {
-    obj = await mediaFactory(media[prop], photographerName);
-    info = await displayInfo(media[prop], photographerName, counter);
+  media.forEach(async function(elmt){
+    let obj = mediaFactory(elmt, photographerName)
+    let info = displayInfo(elmt, photographerName, counter)
     obj.info = info;
-    data.push(obj);
-  }
+    data.push(obj)
+  })
   // 
-  let sortedData = await sortMedia(data, option)
+  // for (const prop in media) {
+  //   obj = await mediaFactory(media[prop], photographerName);
+  //   info =  displayInfo(media[prop], photographerName, counter);
+  //   obj.info = info;
+  //   data.push(obj);
+  // }
+  // 
+  sortedData = sortMedia(data, option)
   sortedData.forEach(function(obj){
     const card = document.createElement("article");
     card.classList.add("card");
@@ -255,10 +256,11 @@ async function displayCards(option, photographerId, photographerName, counter, m
     card.appendChild(obj.media);
     card.appendChild(obj.info);
     counter.setTabindex(card)
+
     section.appendChild(card);
   })
-  await cardEventHandler(sortedData, counter)
-  const lightbox = await displayLightbox(sortedData, photographerId, photographerName);
+  cardEventHandler(sortedData, counter)
+  const lightbox = displayLightbox(sortedData, photographerId, photographerName);
   section.appendChild(lightbox);
   return section;
 }
@@ -268,7 +270,7 @@ async function displayCards(option, photographerId, photographerName, counter, m
  * @param {Array} data 
  * @returns {HTMLDialogElement} dialog
  */
-async function displayLightbox(data) {
+function displayLightbox(data) {
   const lightbox = document.createElement("dialog");
   const container = document.createElement("div");
   const closeBtn = document.createElement("button");
@@ -287,6 +289,7 @@ async function displayLightbox(data) {
     title.classList.add("lightbox_title")
     title.textContent = obj.mediaTitle
     content.setAttribute("mediaid", obj.mediaId)
+    // 
     content.appendChild(media)
     content.appendChild(title)
     container.appendChild(content)
@@ -306,7 +309,7 @@ async function displayLightbox(data) {
   closeIcon.classList.add("lightbox_close_icon");
   closeBtn.classList.add("close_lightbox");
   // 
-  await LightboxEventHandler(leftBtn, rightBtn, container)
+  LightboxEventHandler(leftBtn, rightBtn, container)
   closeBtn.appendChild(closeIcon);
   leftBtn.appendChild(leftIcon)
   rightBtn.appendChild(rightIcon)
@@ -322,10 +325,10 @@ async function displayLightbox(data) {
  * @param {Object} photographer 
  * @returns {HTMLElement} aside
  */
-async function displaySorter(id) {
+function displaySorter(id) {
   const sorter = document.createElement("aside") 
-  const paragraph = document.createElement("p") 
-  const select = document.createElement("select") 
+  const label = document.createElement("label") 
+  const select = document.createElement("select")
   // 
   const likesBtn = document.createElement("button")
   const titleBtn = document.createElement("button")
@@ -336,35 +339,37 @@ async function displaySorter(id) {
   const dateOption = document.createElement("option") 
   const likesOption = document.createElement("option") 
   // 
+  blankOption.setAttribute("value", " ")
   likesOption.setAttribute("value", "likes")
   titleOption.setAttribute("value", "title")
   dateOption.setAttribute("value", "date")
-  blankOption.textContent = ""
-  paragraph.textContent = "Trier par : "
+  select.setAttribute("name", "sorter")
+  select.setAttribute("id", "sort-media")
+  sorter.classList.add("sorter")
+  // 
+  label.textContent = "Trier par : "
   likesBtn.textContent = "Popularité"
   titleBtn.textContent = "Titre"
   dateBtn.textContent = "Date"
   // 
-  await sorterEventHandler(select, id)
+  sorterEventHandler(select, id)
   // 
   likesOption.appendChild(likesBtn);
   titleOption.appendChild(titleBtn);
   dateOption.appendChild(dateBtn);
   // 
-  select.setAttribute("name", "sorter")
-  select.setAttribute("id", "sort-media")
   select.appendChild(blankOption)
   select.appendChild(likesOption)
   select.appendChild(dateOption)
   select.appendChild(titleOption)
+  label.appendChild(select)
   // 
-  sorter.appendChild(paragraph)
-  sorter.appendChild(select)
+  sorter.appendChild(label)
   return sorter
 }
 
 
-// event handlers
+// Handle events 
 
 
 /**
@@ -374,7 +379,7 @@ async function displaySorter(id) {
  * @param {Object} counter 
  * @param {Array} data 
  */
-async function cardEventHandler(data, counter) {
+function cardEventHandler(data, counter) {
   // Open the Lightbox
   data.forEach( function (item) {
     const media = document.querySelector(`[id="${item.mediaId}"] > *:first-child`)
@@ -407,7 +412,7 @@ async function cardEventHandler(data, counter) {
  * @param {HTMLButtonElement} rightBtn 
  * @param {HTMLDivElement} container 
  */
-async function LightboxEventHandler(leftBtn, rightBtn, container) {
+function LightboxEventHandler(leftBtn, rightBtn, container) {
   let curr, prev, next;
   // 
   leftBtn.addEventListener("click", async function (e) {
@@ -495,7 +500,7 @@ async function LightboxEventHandler(leftBtn, rightBtn, container) {
  * @param {HTMLSelectElement} select  
  * @param {String} id
  */
-async function sorterEventHandler(select, id) {
+function sorterEventHandler(select, id) {
   // 
   select.addEventListener("click", function(e){
     e.preventDefault()
@@ -522,14 +527,13 @@ async function sorterEventHandler(select, id) {
         document.location.href = new URL(`${origin}${path}?id=${id}&option=${param.get("option")}`);
       }
       break
-      default : {return console.log("sorter event handler error")}
+      default : {return "sorter event handler error"}
     }
   })
 }
 
 
 // app 
-
 
 /**
  *  Mettre le code JavaScript lié à la page photographer.html
@@ -549,9 +553,9 @@ async function init() {
   // 
   displayContactModal(photographerName);
   displayHeader(photographer);
-  const sorter = await displaySorter(photographerId);
-  const section = await displayCards(option, photographerId, photographerName[0], counter, media);
-  const aside = await displayTag(photographer);
+  const sorter =  displaySorter(photographerId);
+  const section = displayCards(option, photographerId, photographerName[0], counter, media);
+  const aside = displayTag(photographer);
   // 
   main.appendChild(sorter);
   main.appendChild(section);
