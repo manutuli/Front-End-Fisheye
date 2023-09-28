@@ -11,6 +11,15 @@ body {
     font-weight: 400;
 }
 header {}
+dialog {
+    border-color: transparent;
+}
+dialog::backdrop {
+    z-index: 11;
+    inset: 0;
+    /* opacity: 90%; */
+    background-color: #fff;
+}
 main {
     display: flex;
     flex-direction: column;
@@ -105,25 +114,29 @@ select[name="sorter"] {
     color: #901C1C;
 
 }
-.lightbox_close_icon::after {
+/* dialog > .close_lightbox > * {
+    appearance: none;
+    color: #901C1C;
+    fill: #901C1C;
+} */
+.lightbox_close_icon {
     content: url("../assets/icons/close.svg");
 }
-
-.rightBtn > span::after {
-    color: #901C1C;
+.rightBtn > span {
     content: url("../assets/icons/chevron-right.svg");
 }
-.leftBtn > span::after {
-    color: #901C1C;
+.leftBtn > span {
     content: url("../assets/icons/chevron-left.svg");
 }
-.close_lightbox {}
-.leftBtn, .rightBtn{
+.leftBtn,
+.rightBtn {
     width: 80px;
     height: 80px;
+    fill: #901C1C;
     background: transparent;
+    border-color: transparent;
 }
-.leftBtn{
+.leftBtn {
     order: -1;
 }
 .hide_media{
@@ -186,12 +199,6 @@ select[name="sorter"] {
     background-color: #DB8876;
     border: none;
     border-radius: 5px;
-}
-dialog::backdrop {
-    z-index: 11;
-    inset: 0;
-    opacity: 90%;
-    background-color: #fff;
 }
 #open_modal {
     font-size: 20px;

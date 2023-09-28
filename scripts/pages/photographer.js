@@ -152,7 +152,6 @@ async function displayHeader(photographer) {
     // 
     vid.setAttribute("src", `assets/photographers/${photographerName}/${video}`);
     vid.setAttribute("alt", `video: ${title}`);
-    vid.setAttribute("controls", true);
     obj.media =  vid
     obj.mediaId = id
     obj.mediaTitle = title
@@ -283,6 +282,8 @@ function displayLightbox(data) {
   data.forEach( function(obj){
     const content = document.createElement("div");
     const media = obj.media.cloneNode(true)
+    // console.log(media.nodeName)
+    if (media.nodeName === "VIDEO") { media.setAttribute("controls", true) }
     const title = document.createElement("p")
     // 
     content.classList.add("lightbox_content")
