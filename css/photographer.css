@@ -17,8 +17,11 @@ dialog {
 dialog::backdrop {
     z-index: 11;
     inset: 0;
-    /* opacity: 90%; */
     background-color: #fff;
+}
+dialog > button {
+    border-color: transparent;
+    background-color: transparent;
 }
 main {
     display: flex;
@@ -114,11 +117,12 @@ select[name="sorter"] {
     color: #901C1C;
 
 }
-/* dialog > .close_lightbox > * {
-    appearance: none;
-    color: #901C1C;
-    fill: #901C1C;
-} */
+#close_lightbox_id > span {
+    width: 25px;
+    position: relative;
+    left: 555px;
+    top: 60px;
+}
 .lightbox_close_icon {
     content: url("../assets/icons/close.svg");
 }

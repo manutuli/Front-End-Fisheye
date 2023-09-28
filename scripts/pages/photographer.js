@@ -282,25 +282,18 @@ function displayLightbox(data) {
   data.forEach( function(obj){
     const content = document.createElement("div");
     const media = obj.media.cloneNode(true)
-    // console.log(media.nodeName)
-    if (media.nodeName === "VIDEO") { media.setAttribute("controls", true) }
     const title = document.createElement("p")
     // 
     content.classList.add("lightbox_content")
     title.classList.add("lightbox_title")
     title.textContent = obj.mediaTitle
     content.setAttribute("mediaid", obj.mediaId)
+    closeBtn.setAttribute("id", "close_lightbox_id")
+    if (media.nodeName === "VIDEO") { media.setAttribute("controls", true) }
     // 
     content.appendChild(media)
     content.appendChild(title)
     container.appendChild(content)
-  })
-  //     
-  closeBtn.addEventListener("click", function (e) {
-    e.preventDefault()
-    const elements = document.querySelectorAll(`.lightbox_content`)
-    elements.forEach((elm)=> elm.classList.remove("hide_media"))
-    lightbox.close()
   })
   //
   leftBtn.classList.add("leftBtn")
@@ -309,7 +302,13 @@ function displayLightbox(data) {
   lightbox.classList.add("lightbox_modal");
   closeIcon.classList.add("lightbox_close_icon");
   closeBtn.classList.add("close_lightbox");
-  // 
+  //     
+  closeBtn.addEventListener("click", function (e) {
+    e.preventDefault()
+    const elements = document.querySelectorAll(`.lightbox_content`)
+    elements.forEach((elm)=> elm.classList.remove("hide_media"))
+    lightbox.close()
+  })
   LightboxEventHandler(leftBtn, rightBtn, container)
   closeBtn.appendChild(closeIcon);
   leftBtn.appendChild(leftIcon)
